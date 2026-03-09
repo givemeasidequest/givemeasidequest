@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Daily Sidequest</title>
+<style>
+body{
+font-family: Arial;
+text-align:center;
+padding:50px;
+background:#111;
+color:white;
+}
+
+.quest{
+font-size:30px;
+margin-top:40px;
+}
+</style>
+</head>
+
+<body>
+
+<h1>🎯 Daily Sidequest</h1>
+<p>Your random quest for today:</p>
+
+<div class="quest" id="quest"></div>
+
+<script>
+
+const quests = [
+"Talk to a stranger",
+"Learn 5 words in another language",
+"Go for a 20 minute walk",
+"Clean one drawer",
+"Write a message to someone you appreciate",
+"Do 20 pushups",
+"Read 10 pages of a book"
+];
+
+const random = quests[Math.floor(Math.random()*quests.length)];
+
+document.getElementById("quest").innerText = random;
+
+</script>
+
+</body>
+</html>
