@@ -3,10 +3,19 @@
 <head>
 <title>Daily Sidequest</title>
 <style>
+  
 body { font-family: Arial; text-align:center; padding:50px; background:#111; color:white; }
 .quest { font-size:24px; margin-top:30px; }
 button { font-size:18px; padding:10px 20px; margin-top:20px; cursor:pointer; }
 h1 { font-size:36px; }
+
+.quest{
+font-size:24px;
+margin-top:30px;
+opacity:1;
+transition:0.3s;
+}
+
 </style>
 </head>
 <body>
@@ -16,8 +25,35 @@ h1 { font-size:36px; }
 
 <div class="quest" id="quest"></div>
 <button onclick="showQuest()">New Quest</button>
+<button onclick="copyQuest()">Copy Quest</button>
 
 <script>
+
+
+function showQuest() {
+
+const random = quests[Math.floor(Math.random()*quests.length)];
+const quest = document.getElementById("quest");
+
+quest.style.opacity = 0;
+
+setTimeout(() => {
+quest.innerText = random;
+quest.style.opacity = 1;
+},200);
+
+}
+
+function copyQuest() {
+
+const text = document.getElementById("quest").innerText;
+navigator.clipboard.writeText(text);
+alert("Quest copied!");
+// tohle je copy a i animace
+}
+
+
+
 const quests = [
 "Talk to a stranger",
 "Learn 5 words in another language",
@@ -224,7 +260,7 @@ const quests = [
 "Write a funny short story",
 "Take a mindful break"
 ];
-
+// napady
 function showQuest() {
   const random = quests[Math.floor(Math.random() * quests.length)];
   document.getElementById("quest").innerText = random;
