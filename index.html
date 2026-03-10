@@ -30,27 +30,7 @@ transition: opacity 0.3s;
 <script>
 
 
-function showQuest() {
 
-const random = quests[Math.floor(Math.random()*quests.length)];
-const quest = document.getElementById("quest");
-
-quest.style.opacity = 0;
-
-setTimeout(() => {
-quest.innerText = random;
-quest.style.opacity = 1;
-},600);
-
-}
-
-function copyQuest() {
-
-const text = document.getElementById("quest").innerText;
-navigator.clipboard.writeText(text);
-alert("Quest copied!");
-// tohle je copy a i animace
-}
 
 
 
@@ -266,8 +246,33 @@ function showQuest() {
   document.getElementById("quest").innerText = random;
 }
 
+
+  
 // zobrazí quest hned po načtení stránky
 showQuest();
+
+
+  function showQuest() {
+
+const random = quests[Math.floor(Math.random()*quests.length)];
+const quest = document.getElementById("quest");
+
+quest.style.opacity = 0;
+
+setTimeout(() => {
+quest.innerText = random;
+quest.style.opacity = 1;
+},600);
+
+}
+
+function copyQuest() {
+
+const text = document.getElementById("quest").innerText;
+navigator.clipboard.writeText(text);
+alert("Quest copied!");
+// tohle je copy a i animace
+}
 </script>
 
 </body>
