@@ -284,17 +284,7 @@ alert("Quest copied!");
 // tohle je copy a i animace
 }
 
-function toggleTheme() {
-  const body = document.body;
-  const current = body.classList.contains("light");
-  if(current){
-    body.classList.remove("light");
-    localStorage.setItem("theme", "dark");
-  } else {
-    body.classList.add("light");
-    localStorage.setItem("theme", "light");
-  }
-}
+
 
 // při načtení stránky
 window.onload = () => {
