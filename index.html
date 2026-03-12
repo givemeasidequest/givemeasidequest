@@ -2,84 +2,70 @@
 <html>
 <head>
 <title>Daily Sidequest</title>
+
 <style>
-  
-body { font-family: Arial; text-align:center; padding:50px; background:#111; color:white; }
-.quest { font-size:24px; margin-top:30px; }
-button { font-size:18px; padding:10px 20px; margin-top:20px; cursor:pointer; }
-h1 { font-size:36px; }
 
-.quest{
-font-size:24px;
-margin-top:30px;
-opacity:1;
-transition: opacity 0.3s;
-}
-
-body.light {
-  background: #fff;
-  color: #111;
-}
-body { /* default dark */
-  background: #111;
-  color: #fff;
-}
-
-/* default dark mode */
 body{
-background:#111;
-color:white;
 font-family:Arial;
 text-align:center;
 padding-top:50px;
-
+background:#111;
+color:white;
 transition: background 0.4s, color 0.4s;
 }
 
-/* light mode */
 body.light{
 background:white;
 color:black;
 }
 
-button{
-padding:10px 20px;
-font-size:16px;
-cursor:pointer;
+h1{
+font-size:36px;
 }
 
-transition: background 0.4s, color 0.4s, border 0.4s;
+.quest{
+font-size:24px;
+margin-top:30px;
+opacity:1;
+transition:opacity 0.4s;
+}
 
 button{
+font-size:18px;
+padding:10px 20px;
+margin-top:20px;
+cursor:pointer;
 transition: transform 0.15s;
 }
 
 button:hover{
-transform: scale(1.05);
+transform:scale(1.05);
+}
+
+.stats{
+margin-top:30px;
+font-size:18px;
 }
 
 </style>
 </head>
+
 <body>
 
 <h1>🎯 Daily Sidequest</h1>
-<p>Click the button to get your quest:</p>
 
 <div class="quest" id="quest"></div>
-<button onclick="showQuest()">New Quest</button>
+
+<button onclick="completeQuest()">Complete Quest</button>
 <button onclick="copyQuest()">Copy Quest</button>
-
-
-
 <button onclick="toggleTheme()">Switch Theme</button>
 
+<div class="stats">
+<p>XP: <span id="xp">0</span></p>
+<p>Streak: <span id="streak">0</span> 🔥</p>
+</div>
 
 <script>
-
-
-
-
-
 
 const quests = [
 "Talk to a stranger",
@@ -101,227 +87,96 @@ const quests = [
 "Plan your next day",
 "Send a thank you message",
 "Listen to a new song",
-"Do a 5-minute meditation",
-"Call a friend you haven’t talked to",
-"Stretch for 5 minutes",
-"Try a new hobby",
-"Write down three things you’re grateful for",
-"Organize your files on your computer",
-"Go outside and notice 3 new things",
-"Learn one word in sign language",
-"Try a different route walking somewhere",
-"Write a short story",
-"Clean your keyboard",
-"Do 10 jumping jacks",
-"Look up a historical fact",
-"Teach someone something you know",
-"Write a funny joke",
-"Pick up trash nearby",
-"Make a playlist of 5 new songs",
-"Try to memorize a phone number",
-"Do a random act of kindness",
-"Organize your bookshelf",
-"Watch a 10-minute educational video",
-"Do a breathing exercise",
-"Write a letter to yourself",
-"Learn 3 words in another language",
-"Make a small craft",
-"Sketch your favorite object",
-"Try a new type of tea or coffee",
-"Plan a mini adventure",
-"Make a list of goals for today",
-"Do a 2-minute plank",
-"Organize your closet",
-"Learn a tongue twister",
-"Do 15 sit-ups",
-"Try a new stretching exercise",
-"Watch a TED Talk",
-"Draw a comic strip",
-"Take a short walk in a park",
-"Write a motivational quote",
-"Learn a magic trick",
-"Try cooking a new dish",
-"Research a random topic",
-"Clean your shoes",
-"Write a short diary entry",
-"Practice deep breathing for 3 minutes",
-"Pick one thing to declutter",
-"Do a handstand against a wall",
-"Try a new hairstyle",
-"Learn to say hello in 5 languages",
-"Do 10 push-ups",
-"Write a letter to a friend",
-"Read a poem",
-"Make your bed neatly",
-"Try a new app or tool",
-"Sketch something outside",
-"Go for a jog",
-"Listen to a podcast episode",
-"Do a meditation session",
-"Organize your wardrobe",
-"Learn one fact about animals",
-"Take a photo of the sky",
-"Clean one part of your room",
-"Do 20 squats",
-"Write down 5 things that make you happy",
-"Try a new drawing style",
-"Send a message of encouragement",
-"Learn 3 new words in a foreign language",
-"Walk barefoot on grass",
-"Do 5 burpees",
-"Try a DIY project",
-"Learn a new dance move",
-"Write a short dialogue",
-"Research a country",
-"Make a small gift for someone",
-"Read a chapter from a book",
-"Do a 10-minute workout",
-"Learn a new joke",
-"Sketch a face",
-"Organize your backpack",
-"Try a new fruit or vegetable",
-"Write a poem about today",
-"Do a random act of kindness online",
-"Stretch your legs for 10 minutes",
-"Write down your favorite memories",
-"Try a new sport skill",
-"Take a mindful walk",
-"Make a gratitude list",
-"Organize your digital photos",
-"Try a new type of music",
-"Write a short song",
-"Practice a foreign accent",
-"Do 20 push-ups",
-"Learn a fact about history",
-"Draw your favorite animal",
-"Try a new hobby for 15 minutes",
-"Write a letter to your future self",
-"Do a 5-minute plank",
-"Learn to say thank you in 5 languages",
-"Do a short yoga routine",
-"Write down a challenge you want to overcome",
-"Make a mini vision board",
-"Learn a new skill from YouTube",
-"Sketch a landscape",
-"Organize your shoes",
-"Try a new recipe",
-"Write down 3 dreams",
-"Do 10 sit-ups",
-"Try a new style of writing",
-"Take a photo of something interesting",
-"Learn a new fact about science",
-"Clean one small area",
-"Practice mindfulness for 5 minutes",
-"Draw your favorite character",
-"Write a short motivational message",
-"Do a 5-minute cardio exercise",
-"Make a list of things to achieve this week",
-"Learn a new card trick",
-"Try a new tea or coffee",
-"Write a gratitude letter",
-"Do 20 squats",
-"Sketch a random object",
-"Research an interesting topic",
-"Take a new route somewhere",
-"Learn a new word in another language",
-"Do 5 minutes of stretching",
-"Write down 3 things you learned today",
-"Try a random act of kindness",
-"Listen to a new podcast",
-"Write a short story about an adventure",
-"Take a mindful photo",
-"Do 10 push-ups",
-"Organize your desk",
-"Sketch something abstract",
-"Try a new game",
-"Write a poem about nature",
-"Learn a new fact about technology",
-"Do a 5-minute meditation",
-"Make a list of hobbies to try",
-"Practice a new skill for 15 minutes",
-"Write a motivational quote",
-"Try a new workout",
-"Sketch your hand",
-"Research an interesting event in history",
-"Do 10 jumping jacks",
-"Write a diary entry",
-"Take a mindful walk outside",
-"Try a new drawing tool",
-"Learn a new phrase in another language",
-"Clean a small area",
-"Do 15 sit-ups",
-"Write 5 things you are grateful for",
-"Try a new hobby for 30 minutes",
-"Sketch a plant",
-"Write a short joke",
-"Learn a new fact about animals",
-"Do a 5-minute plank",
-"Take a photo of something colorful",
-"Organize your digital files",
-"Write a small motivational speech",
-"Do a short yoga routine",
-"Try a new recipe",
-"Learn a new fun fact",
-"Sketch a random object",
-"Write a mini story",
-"Take a 10-minute walk",
-"Do 10 push-ups",
-"Write down 3 things you love",
-"Try a new music genre",
-"Practice mindfulness for 5 minutes",
-"Write a letter to a friend",
-"Do a 10-minute workout",
-"Sketch your favorite animal",
-"Research a random fact",
-"Write a motivational note",
-"Try a new craft project",
-"Do 20 squats",
-"Take a photo of the sky",
-"Write a short poem",
-"Learn something new about space",
-"Sketch your favorite food",
-"Do 5 burpees",
-"Write down a new goal",
-"Try a new type of exercise",
-"Practice a new skill for 15 minutes",
-"Write a funny short story",
-"Take a mindful break"
+"Do a 5-minute meditation"
 ];
-// napady
-function showQuest() {
-  const random = quests[Math.floor(Math.random() * quests.length)];
-  document.getElementById("quest").innerText = random;
+
+let xp = localStorage.getItem("xp") || 0;
+let streak = localStorage.getItem("streak") || 0;
+
+document.getElementById("xp").innerText = xp;
+document.getElementById("streak").innerText = streak;
+
+function getToday(){
+
+return new Date().toDateString();
+
 }
 
+function showQuest(){
 
-  
-// zobrazí quest hned po načtení stránky
-showQuest();
+const questElement = document.getElementById("quest");
 
+const savedDate = localStorage.getItem("questDate");
+const savedQuest = localStorage.getItem("dailyQuest");
 
-  function showQuest() {
+if(savedDate === getToday()){
+
+questElement.innerText = savedQuest;
+return;
+
+}
 
 const random = quests[Math.floor(Math.random()*quests.length)];
-const quest = document.getElementById("quest");
-  
-quest.style.opacity = 0;
 
-setTimeout(() => {
-quest.innerText = random;
-quest.style.opacity = 1;
-},600);
+questElement.style.opacity = 0;
+
+setTimeout(()=>{
+questElement.innerText = random;
+questElement.style.opacity = 1;
+},400);
+
+localStorage.setItem("dailyQuest",random);
+localStorage.setItem("questDate",getToday());
 
 }
 
-function copyQuest() {
+function completeQuest(){
+
+const lastCompleted = localStorage.getItem("lastCompleted");
+
+if(lastCompleted === getToday()){
+
+alert("You already completed today's quest!");
+return;
+
+}
+
+xp = Number(xp) + 10;
+
+document.getElementById("xp").innerText = xp;
+
+localStorage.setItem("xp",xp);
+
+const yesterday = new Date();
+yesterday.setDate(yesterday.getDate()-1);
+
+if(lastCompleted === yesterday.toDateString()){
+
+streak++;
+
+}else{
+
+streak = 1;
+
+}
+
+document.getElementById("streak").innerText = streak;
+
+localStorage.setItem("streak",streak);
+localStorage.setItem("lastCompleted",getToday());
+
+alert("Quest completed! +10 XP");
+
+}
+
+function copyQuest(){
 
 const text = document.getElementById("quest").innerText;
 navigator.clipboard.writeText(text);
 alert("Quest copied!");
-// tohle je copy a i animace
+
 }
 
-/* změna theme */
 function toggleTheme(){
 
 if(document.body.classList.contains("light")){
@@ -334,8 +189,9 @@ localStorage.setItem("theme","light");
 
 }
 
-/* načtení uloženého theme při otevření stránky */
 window.onload = function(){
+
+showQuest();
 
 const savedTheme = localStorage.getItem("theme");
 
@@ -344,8 +200,6 @@ document.body.classList.add("light");
 }
 
 }
-
-document.body.classList.add("light")
 
 </script>
 
